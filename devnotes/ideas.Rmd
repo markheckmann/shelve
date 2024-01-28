@@ -1,0 +1,49 @@
+---
+title: "Idea"
+output: html_document
+date: "2024-01-27"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Misc
+
+
+## Idea
+
+The `shelve` package tries to better integrate report generation into your R code.
+When creating a report, a common way ist to use Rmarkdown/Quarto. This is useful for many instance. However, I find that using it that this somewhat restrig for my way of working.
+
+There are to types of concept: 
+
+- `shelf`: A storage for objects
+- `shelve`: Putting something into a shelf
+- `unshelve`: Retrieve something from a shelf
+
+The package functions usually start with one of the two word.
+
+```{r eval=TRUE}
+library(shelve)
+
+shelf_list()
+shelf_active()
+shelf_activate("test")
+shelf_list()
+shelf_remove("test")
+
+shelf_clear()
+shelf_files()
+shelve(mtcars, "cars")
+shelf_files()
+
+unshelve("cars") |> head()
+```
+
+Create a report from a shelf.
+
+
+## Storing objects locally
+
+There are different options to store data on disk. To preserve data between sessions, we use the `hoards` package, which use `rappdirs` under the hood. 

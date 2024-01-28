@@ -1,0 +1,56 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# shelve: Simple interface to store objects on disk for later use
+
+<!-- badges -->
+[![R](https://img.shields.io/badge/language-R-blue)]()
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange)]()
+<!-- badges -->
+
+## Idea
+
+The `shelve` package tries to better integrate report generation into your R code.
+When creating a report, a common way ist to use Rmarkdown/Quarto. This is useful for many instance. However, I find that using it that this somewhat restrict for my way of working.
+
+There are a few relevant concepts: 
+
+- `shelf`: A storage for objects
+- `shelve`, `unshelve`: Add and retrieve something from a shelf
+
+
+```{r eval=TRUE}
+library(shelve)
+
+shelf_list()
+shelf_active()
+shelf_activate("test")
+shelf_list()
+shelf_remove("test")
+
+shelf_clear()
+shelf_files()
+shelve(mtcars, "cars")
+shelf_files()
+
+unshelve("cars") |> head()
+```
+
+Create a report from a shelf.
+
+
+## Storing objects locally
+
+There are different options to store data on disk. To preserve data between sessions, we use the `hoards` package, which use `rappdirs` under the hood. 
