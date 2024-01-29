@@ -9,6 +9,12 @@
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange)]()
 <!-- badges -->
 
+## Installation
+
+``` r
+pak::pkg_install("markheckmann/shelve")
+```
+
 ## Idea
 
 The `shelve` package tries to better integrate report generation into
