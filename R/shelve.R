@@ -31,12 +31,13 @@ unshelve <- function(name, shelf = shelf_active()) {
 #' @export
 #'
 delete <- function(x, shelf = shelf_active(), ignore_not_found = TRUE) {
+  .h <- get_hoard()
   if (!length(x)) {
     cli::cli_alert_warning("No object names provided. Nothing deleted.")
     return(invisible())
   }
-  if (ignore_not_found) {
-    not_found <- setdiff(x, shelf_files())
+  not_found <- setdiff(x, shelf_files())
+  if (ignore_not_found && length(not_found)) {
     cli::cli_alert_warning("Ignoring: {not_found}")
     x <- intersect(x, shelf_files())
   }
